@@ -2,7 +2,7 @@
 
 This keymap is ported from my Planck keymap.
 
-https://imgur.com/a/8Yeqc
+![Layout Image](https://i.imgur.com/GByv6tt.png)
 
 /* Qwerty
  * ,-----------------------------------------. ,-----------------------------------------.
