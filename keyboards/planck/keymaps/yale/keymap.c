@@ -2,10 +2,6 @@
 
 #include QMK_KEYBOARD_H
 
-// Each layer gets a name for readability, which is then used in the keymap matrix below.
-// The underscores don't mean anything - you can have a layer called STUFF or any other name.
-// Layer names don't all need to be of the same length, obviously, and you can also skip them
-// entirely and just use numbers.
 #define _QWERTY 0
 #define _NUM 5
 #define _FUNC 6
@@ -74,22 +70,53 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,       XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,        XXXXXXX,        XXXXXXX,    XXXXXXX,        XXXXXXX,    XXXXXXX
 ),
 
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+  [_QWERTY] = KC_KEYMAP_MIT( \
+  //,-----------------------------------------.-----------------------------------------.
+        ESC,     Q,     W,     E,     R,     T,     Y,     U,     I,     O,     P,  BSPC,\
+  //|------+------+------+------+------+------|------+------+------+------+------+------|
+      CTLTB,     A,     S,     D,     F,     G,     H,     J,     K,     L,  SCLN,  QUOT,\
+  //|------+------+------+------+------+------|------+------+------+------+------+------|
+       LSFT,     Z,     X,     C,     V,     B,     N,     M,  COMM,   DOT,  SLSH,  RSFT,\
+  //|------+------+------+------+------+------+------+------+------+------+------+------|
+      _____, _____, _____, GUIEI,   NUM,      SPC,      FUNC, ALTKN, _____, _____, _____ \
+  //|___________________________________________________________________________________,
+  ),
+
+  [_NUM] = KC_KEYMAP_MIT( \
+  //,-----------------------------------------.-----------------------------------------.
+      _____,     1,     2,     3,     4,     5,     6,     7,     8,     9,     0, _____,\
+  //|------+------+------+------+------+------|------+------+------+------+------+------|
+       LCTL,   GRV,  LBRC,  LCBR,  LPRN,  SLSH,  BSLS,  RPRN,  RCBR,  RBRC,  MINS,   EQL,\
+  //|------+------+------+------+------+------|------+------+------+------+------+------|
+      _____,  EXLM,    AT,  HASH,   DLR,  PERC,  CIRC,  AMPR,  ASTR,  UNDS,  PLUS, _____,\
+  //|------+------+------+------+------+------+------+------+------+------+------+------|
+      _____, _____, _____, _____, _____,      ENT,       NAV, _____, _____, _____, _____ \
+  //|___________________________________________________________________________________,
+  ),
+
+  [_FUNC] = KC_KEYMAP_MIT( \
+  //,-----------------------------------------.-----------------------------------------.
+      _____,     1,     2,     3,     4,     5,     6,     7,     8,     9,     0, _____,\
+  //|------+------+------+------+------+------|------+------+------+------+------+------|
+      _____,  LSFT,  LCTL,  LALT,  LGUI, _____,  LEFT,  DOWN,    UP,  RGHT,   DEL, _____,\
+  //|------+------+------+------+------+------|------+------+------+------+------+------|
+      _____, _____, _____, _____, _____, _____,  MPRV,  VOLD,  VOLU,  MNXT,  MUTE, _____,\
+  //|------+------+------+------+------+------+------+------+------+------+------+------|
+      _____, _____, _____, _____,   NAV,    _____,     _____,  MPLY, _____, _____, _____ \
+  //|___________________________________________________________________________________,
+  ),
+
+  [_NAV] = KC_KEYMAP_MIT( \
+  //,-----------------------------------------.-----------------------------------------.
+        RST, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,   PWR,\
+  //|------+------+------+------+------+------|------+------+------+------+------+------|
+       LTOG,  LHUI,  LSAI,  LVAI, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,\
+  //|------+------+------+------+------+------|------+------+------+------+------+------|
+       LMOD,  LHUD,  LSAD,  LVAD, XXXXX, XXXXX, XXXXX,  BRID,  BRIU, XXXXX, XXXXX,  SLEP,\
+  //|------+------+------+------+------+------+------+------+------+------+------+------|
+      _____, _____, _____, _____, _____,     _____,    _____, _____, _____, _____, _____ \
+  //|___________________________________________________________________________________,
+  )
 };
 
-const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
-{
-    // MACRODOWN only works in this function
-            switch(id) {
-                case 0:
-                    if (record->event.pressed) {
-                        register_code(KC_RSFT);
-                        #ifdef BACKLIGHT_ENABLE
-                            backlight_step();
-                        #endif
-                    } else {
-                        unregister_code(KC_RSFT);
-                    }
-                break;
-            }
-        return MACRO_NONE;
-};
