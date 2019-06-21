@@ -1,6 +1,11 @@
 //
 
 #include QMK_KEYBOARD_H
+#include LIGHT_CONFIG_H
+#include "light.h"
+#ifdef BACKLIGHT_ENABLE
+    #include "backlight.h"
+#endif
 
 #define _QWERTY 0
 #define _NUM 5
